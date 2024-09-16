@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService {
 
             User response = this.userRepository.findByEmail(user.getEmail());
 
-            if (response != null) {
+            if (response!= null) {
                 throw new ServiceException("El correo ya está registrado");
             }
 
@@ -49,7 +49,8 @@ public class UserServiceImpl implements IUserService {
             return this.userMapper.toDTO(user1);
 
         } catch (Exception e) {
-            throw new ServiceException("Ha ocurrido un error inesperado");
+            log.error(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
